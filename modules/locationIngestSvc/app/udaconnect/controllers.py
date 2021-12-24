@@ -1,5 +1,7 @@
 from datetime import datetime
 
+from marshmallow import fields
+
 from app.udaconnect.models import Connection, Location, Person
 from app.udaconnect.schemas import (
     ConnectionSchema,
@@ -19,17 +21,30 @@ api = Namespace("UdaConnect", description="Connections via geolocation.")  # noq
 
 # TODO: This needs better exception handling
 
+resource_fields = api.model('Resource', {
+    'id': fields.Integer(),
+    'person_id' : fields.Integer(),
+    'longitude' : fields.String(),
+    'latitude' : fields.String(),
+    'creation_time' : fields.String()
+})
+
+@api.model(fields={'id': fields.Integer, 'person_id': fields.Integer, 'longitude' : fields.String, 'latitude' : fields.String, 'creation_time' : fields.DateTime})
+class Person(fields.Raw):
+    def format(self, value):
+        return {'id': value.id, 'person_id': value.person_id, 'longitude': value.longitude, "latitude": value.latitude, 'creation_time' : value.creation_time}
 
 @api.route("/locations")
-@api.doc(params={'id': '', 'person_id': '', 'longitude' : '', 'latitude' : '', 'creation_time' : ''})
+
 # @api.route("/locations/<location_id>")
 # @api.param("location_id", "Unique ID for a given Location", _in="query")
 class LocationResource(Resource):
     @accepts(schema=LocationSchema)
     @responds(schema=LocationSchema)
+    @api.doc(body = Person)
     def post(self) -> Location:
-        request.get_json()
-        location: Location = LocationService.create(request.get_json())
+        request.get_json(force=True)
+        location: Location = LocationService.create(request.get_json(force=True))
         return location
 
     @responds(schema=LocationSchema)
