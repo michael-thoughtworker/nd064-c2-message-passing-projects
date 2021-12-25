@@ -5,6 +5,11 @@ metadata:
     service: udaconnect-location-sink
   name: udaconnect-location-sink
 spec:
+  ports:
+  - name: "5000"
+    port: 5000
+    targetPort: 5000
+    nodePort: 30004
   selector:
     service: udaconnect-location-sink
   type: NodePort
