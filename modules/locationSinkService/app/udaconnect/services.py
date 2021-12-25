@@ -8,7 +8,7 @@ from kafka import KafkaConsumer
 logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger("udaconnect-api")
 TOPIC_NAME = 'locations'
-KAFKA_SERVER = 'localhost:9092'
+KAFKA_SERVER = 'my-release-kafka:9092'
 kafka_consumer = KafkaConsumer(TOPIC_NAME, bootstrap_servers=KAFKA_SERVER)
 
 class LocationSinkService:

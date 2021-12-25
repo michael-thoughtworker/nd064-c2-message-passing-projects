@@ -8,7 +8,7 @@ from locationServicer import LocationServicer
 
 # Initialize gRPC server
 server = grpc.server(futures.ThreadPoolExecutor(max_workers=2))
-location_pb2_grpc.add_OrderServiceServicer_to_server(LocationServicer(), server)
+location_pb2_grpc.add_LocationServiceServicer_to_server(LocationServicer(), server)
 
 
 print("Server starting on port 5005...")

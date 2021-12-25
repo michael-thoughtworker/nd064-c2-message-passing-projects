@@ -43,7 +43,7 @@ class LocationService:
         # db.session.commit()
 
         TOPIC_NAME = 'locations'
-        KAFKA_SERVER = 'localhost:9092'
+        KAFKA_SERVER = 'my-release-kafka:9092'
         kafka_producer = KafkaProducer(bootstrap_servers=KAFKA_SERVER)
         # Setting Kafka to g enables us to use this
         # in other parts of our application
