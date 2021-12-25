@@ -11,28 +11,28 @@ spec:
     targetPort: 5000
     nodePort: 30001
   selector:
-    service: udaconnect-api
+    service: udaconnect-connection
   type: NodePort
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    service: udaconnect-api
-  name: udaconnect-api
+    service: udaconnect-connection
+  name: udaconnect-connection
 spec:
   replicas: 1
   selector:
     matchLabels:
-      service: udaconnect-api
+      service: udaconnect-connection
   template:
     metadata:
       labels:
-        service: udaconnect-api
+        service: udaconnect-connection
     spec:
       containers:
       - image: ligenchang/udaconnect-connection-svc:latest
-        name: udaconnect-api
+        name: udaconnect-connection
         imagePullPolicy: Always
         env:
         - name: DB_USERNAME
