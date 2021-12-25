@@ -1,0 +1,21 @@
+The GRPC proto buffers design is located in modules/locationIngestService/location.proto
+
+syntax = "proto3";
+
+message LocationMessage {
+  int32 id = 1;
+  int32 person_id = 2;
+  string longitude = 3;
+  string latitude = 4;
+  string creation_time = 5;
+}
+
+
+
+service LocationService {
+    rpc Create(LocationMessage) returns (LocationMessage);
+}
+
+
+As sample GRPC request can be located in file modules/locationIngestService/writter.py
+

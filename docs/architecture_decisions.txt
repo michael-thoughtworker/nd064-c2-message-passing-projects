@@ -1,0 +1,7 @@
+1. The front-end app will talk to connection microservice to get each individual person's connections via restful api
+2. The front-end app will talk to person microservice to get the list of all person to initial the frond-end data via restful api
+3. The connection svc will directly talk to database to retrieve the connections info based on the request
+4. Each person's mobile device will be sending their location to Location Ingest Microservice, as this will be high volume traffic, so I decided to 
+   use GRPC protocol due to its high performace attribute
+5. Location Ingst Microservice will forward the ingested location data to kafka message queue
+6. There is another Location sink microservice to connect to kafka cluster to read the data in kafka and saved them into database
